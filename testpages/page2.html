@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>JavaScript</title>
+	<script type="text/javascript">
+	    function chkChars(charInput) {
+		    var result = valChars();  //true or false
+			var x;
+			document.getElementById("output").innerHTML = result;
+			function valChars() {
+			    var validChars = /^[A-Za-z]+$/;        // /^[\p{Alphabetic}]+$/u; is better
+				if (charInput.value.match(validChars)) {
+				    x = true;
+					return x;
+				} else {
+				    alert("Please enter letters only");
+					x = false;
+					return x;
+				}
+			}
+		}
+	</script>
+	<style>
+	    p {
+		    font-family: "Trebucket MS", Arial, Helvetica, sans-serif;
+			font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+    <header></header>
+	<div>
+	<main>
+    	<form name="myForm" action="#" onsubmit="return false">
+			<input type="text" id="text1" name="text1" />
+            <input type="submit" value="Submit now" onclick="chkChars(document.myForm.text1)" />
+			<br /><br />
+			<span id="output"></span>
+		</form>
+	</main>
+	</div>
+	<footer></footer>
+</body>
+</html>

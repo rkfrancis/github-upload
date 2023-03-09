@@ -1,0 +1,11 @@
+pdf417lib-0.91 (2005-03-18)
+
+    - some functions were made static
+
+    - wrapped the function definitions in pdf417lib.h with extern "C"
+
+    - included <stdlib.h> to the top of pdf417lib.c
+
+pdf417lib-0.90 (2003-01-22)
+
+    - initial release

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>JavaScript</title>
+	<script type="text/javascript">
+	    function formProcess() {
+		    var capture = document.forms["input"]["fname"].value + "<br />";
+		    capture += document.forms["input"]["color"].value + "<br />";
+		    capture += document.forms["input"]["iceCream"].value + "<br />";
+		    capture += document.forms["input"]["callMe_0"].value + "<br />";
+		    capture += document.forms["input"]["callMe_1"].value + "<br />";
+			document.getElementById("outputDiv").innerHTML = capture;
+		}
+	</script>
+</head>
+<body>
+    <header></header>
+	<div>
+	<main>
+    	<div id="outputDiv" style="width: 200px; height: 75px; border: 1px solid;"></div>
+	    <form id="input" name="myForm" enctype="multipart/form-data"
+		      onsubmit="return false">
+		    <p>Name: <input type="text" id="fname" name="fname" /></p>
+		    <p>Favorite color: <input type="color" id="color" name="color" /></p>
+			<p>Ice Cream: <select name="Ice Cream" id="iceCream">
+			    <option>Vanilla</option>
+				<option>Chocolate</option>
+				<option>Strawberry</option>
+			</select></p>
+			<p>Call me?
+			    <label>
+				    <input type="radio" name="callMe" value="Yes" id="callMe_0" />
+				Yes</label>
+			    <label>
+				    <input type="radio" name="callMe" value="No" id="callMe_1" />
+				No</label>
+    			<br />
+	    		<br />
+                <input type="submit" value="OK" onclick="formProcess()" />
+			</p>
+		</form>
+	</main>
+	</div>
+	<footer></footer>
+</body>
+</html>

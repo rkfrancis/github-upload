@@ -1,0 +1,1 @@
+CMake projects should use: "-DCMAKE_TOOLCHAIN_FILE=E:/Guru99/Microsoft/vcpkg/scripts/buildsystems/vcpkg.cmake"

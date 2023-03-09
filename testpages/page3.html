@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>JavaScript</title>
+	<script type="text/javascript">
+	    function doIt() {
+		    var varName = document.getElementById("input1").value;  // we want was was type in, not the field itself
+			var varVal = document.getElementById("input2").value;
+			if (varVal.match(/^[0-9.-]+$/) != null) {
+			    eval("var " + varName + " = " + Number(varVal));    // eval runs what is in it
+			} else if (varVal.match(/^[true|false]+$/) != null) {
+			    eval("var " + varName + " = " + varVal);
+			} else {
+			    eval("var " + varName + " = " + '"' + varVal + '"');
+			}
+			document.getElementById("output1").innerHTML = "Created: " + varName + " equals " + varVal +
+			                                               "<br />Variable " + (eval(varName)) + " is type "+
+														   typeof (eval(varName));
+		}
+	</script>
+</head>
+<body>
+    Enter variable name: <input type="text" id="input1" />
+	<br /><br />
+	Enter a value: <input type="text" size="5" id="input2" />
+	<br /><br />
+    [Hint: can be number, string, or Boolean]
+	<br /><br />
+	<input type="button" onclick="doIt()" value="submit" />
+	<br /><br />
+	<div id="output1"></div>
+</body>
+</html>

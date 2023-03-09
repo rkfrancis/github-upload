@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Fractal Tree</title>
+            <!-- This can take a long time to come up! -->
+  </head>
+  <body>
+            <!-- width was 700 but was not enough -->
+    <canvas id="my_canvas" width="900" height="600">
+      Your browser does not support the HTML canvas tag.
+    </canvas>
+    <script type="text/javascript">
+      var myCanvas = document.getElementById("my_canvas");
+      var ctx = myCanvas.getContext("2d");
+                   // Everytime we encounter a zero in the sequence, we draw a straight line of a fixed length
+                   // Everytime we encounter a one in the sequence, we rotate the canvas by 60 degrees.
+      function draw() {
+        var sequence = generateSequenceTM();
+        var parts = sequence.split("");
+                 // instead of 20 it was zero
+        ctx.translate(20, myCanvas.height - 20);
+        ctx.beginPath();
+        ctx.moveTo(0,0);
+        for (var i = 0; i < parts.length; i++) {
+          if (parts[i] == "0") {
+            ctx.translate(0,0.1);
+            ctx.lineTo(0,0.1);
+          } else {
+            ctx.rotate(Math.PI/3);
+          }
+        }
+        ctx.stroke();
+      }
+      draw();
+    </script>
+  </body>
+</html>

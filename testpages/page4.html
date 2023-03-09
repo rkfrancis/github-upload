@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>JavaScript</title>
+	<script type="text/javascript">
+	    function doIt() {
+		           //
+		           // Determine the optimal frame rate for animation
+                   //
+			window.requestAnimFrame = (function() {
+			   return window.requestAnimationFrame ||
+			          window.webkitRequestAnimationFrame ||
+			          window.mozRequestAnimationFrame ||
+			          window.oRequestAnimationFrame ||
+			          window.msRequestAnimationFrame ||
+					  function (callback) {
+					      window.setTimeout(callback, 1000/60);
+					  };
+            })();
+            /*  better? TODO
+			(function() {
+    			var lastTime = 0;
+    			var vendors = ['webkit', 'moz'];
+    			for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        			window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        			window.cancelAnimationFrame =
+          			window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+    			}
+			    if (!window.requestAnimationFrame)
+        			window.requestAnimationFrame = function(callback, element) {
+            			var currTime = new Date().getTime();
+            			var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            			var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+                			timeToCall);
+			            lastTime = currTime + timeToCall;
+            			return id;
+        			};
+    			if (!window.cancelAnimationFrame)
+        			window.cancelAnimationFrame = function(id) {
+            			clearTimeout(id);
+        			};
+			}()); */
+
+    	    function drawRectangle(myRectangle, context) {
+			    context.beginPath();
+				context.rect(myRectangle.x, myRectangle.y, myRectangle.width, myRectangle.height);
+				context.fillStyle = "#ffff00";
+				context.fill();
+				context.lineWidth = myRectangle.borderWidth;
+				context.strokeStyle = "black";
+				context.stroke();
+			}
+
+			function animate(myRectangle, canvas, context, startTime) {
+			       //update
+				var time = (new Date()).getTime() - startTime;
+				var linearSpeed = 100;
+				   // pixels / second
+				var newX = linearSpeed * time / 1000;
+				   // clear
+				var coords = "x: " + myRectangle.x + " y: " + myRectangle.y;
+				document.getElementById("output").innterHTML = coords;
+				context.clearRect(myRectangle.x - 5, myRectangle.y - 5, myRectangle.width + 10, myRectangle.height + 10);
+				if (newX < canvas.width - myRectangle.width - myRectangle.borderWidth / 2) {
+				    myRectangle.x = newX;
+				}
+
+				drawRectangle(myRectangle, context);
+
+				   // get new frame
+				requestAnimFrame(function () {
+				    animate(myRectangle, canvas, context, startTime);
+				});
+			}
+			var canvas = document.getElementById("myCanvas");
+			var context = canvas.getContext("2d");
+			var myRectangle = {
+			    x: 0,
+				y: 125,
+				width: 100,
+				height: 100,
+				borderWidth: 2
+			};
+
+			drawRectangle(myRectangle, context);
+
+				   // get new frame
+			requestAnimFrame(function() {
+			    animate(myRectangle, canvas, context, startTime);
+			});
+
+            setTimeout(function () {
+			    var startTime = (new Date()).getTime();
+				animate(myRectangle, canvas, context, startTime);
+			}, 0);
+		}
+	</script>
+	<style type="text/css">
+	    body {
+		    font-family: Calibri;
+			font-size: 16px;
+		}
+		#myCanvas {
+		    background-color: yellow;
+		}
+	</style>
+</head>
+<body>
+    <canvas id="myCanvas" width="500" height="300" style="border: 1px solid #000000;"></canvas><br /><br />
+	<br /><br />
+	<input type="button" onclick="doIt()" value="GO" />
+	<span id="output"></span>
+</body>
+</html>
