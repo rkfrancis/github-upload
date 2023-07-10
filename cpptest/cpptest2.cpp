@@ -15,7 +15,7 @@ struct func_object
 {
 	string& s;
 	func_object(string& str) : s(str) {}
-	void operator()() { cout << s << ", hi from function\n"; }
+	void operator()() { cout << s << ", hi from function object\n"; }
 };
 
 //the objective of many threaded applications is to asynchronously operate on data sets
